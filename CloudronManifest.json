@@ -1,0 +1,19 @@
+{
+  "id": "nu.sogo.cloudronapp",
+  "title": "SOGo",
+  "author": "sogo developers",
+  "description": "file://DESCRIPTION.md",
+  "tagline": "Calendar and Contacts",
+  "version": "0.0.1",
+  "healthCheckPath": "/",
+  "httpPort": 3000,
+  "addons": {
+    "localstorage": {}
+  },
+  "targetBoxVersion": "0.4.0",
+  "manifestVersion": 1,
+  "website": "http://www.sogo.nu/",
+  "contactEmail": "support@cloudron.io",
+  "icon": "",
+  "mediaLinks": [ ]
+}
