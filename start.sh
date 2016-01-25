@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eux
+set -eu -o pipefail
 
 echo "Generating sogo.conf"
 

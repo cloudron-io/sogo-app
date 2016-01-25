@@ -5,13 +5,14 @@
   "description": "file://DESCRIPTION.md",
   "tagline": "Calendar and Contacts",
   "version": "0.0.1",
-  "healthCheckPath": "/",
+  "healthCheckPath": "/healthcheck",
   "httpPort": 3000,
   "addons": {
     "mysql": {},
     "sendmail": {},
     "ldap": {}
   },
+  "developmentMode": false,
   "targetBoxVersion": "0.4.0",
   "manifestVersion": 1,
   "website": "http://www.sogo.nu/",
