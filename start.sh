@@ -2,7 +2,7 @@
 
 set -eux
 
-echo "SOGo"
+echo "Generating sogo.conf"
 
 sed -e "s,##MYSQL_URL##,${MYSQL_URL}," \
     -e "s,##MAIL_SMTP_SERVER##,${MAIL_SMTP_SERVER}," \
@@ -12,9 +12,12 @@ sed -e "s,##MYSQL_URL##,${MYSQL_URL}," \
     -e "s/##LDAP_USERS_BASE_DN##/${LDAP_USERS_BASE_DN}/" \
     /app/code/sogo.conf  > /run/sogo.conf
 
+echo "Generating nginx.conf"
+
 sed -e "s,##HOSTNAME##,${APP_DOMAIN}," \
     /app/code/nginx.conf  > /run/nginx.conf
 
+echo "Make cloudron own /run"
 chown cloudron:cloudron /run
 
 echo "Start nginx"
