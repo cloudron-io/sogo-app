@@ -24,4 +24,4 @@ echo "Start nginx"
 nginx -c /run/nginx.conf &
 
 echo "Start sogod"
-/usr/local/bin/gosu cloudron:cloudron /usr/sbin/sogod
+exec /usr/local/bin/gosu cloudron:cloudron /usr/sbin/sogod

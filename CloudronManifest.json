@@ -8,16 +8,14 @@
   "healthCheckPath": "/",
   "httpPort": 3000,
   "addons": {
-    "localstorage": {},
     "mysql": {},
     "sendmail": {},
     "ldap": {}
   },
-  "developmentMode": true,
   "targetBoxVersion": "0.4.0",
   "manifestVersion": 1,
   "website": "http://www.sogo.nu/",
   "contactEmail": "support@cloudron.io",
-  "icon": "",
-  "mediaLinks": [ ]
+  "icon": "logo.png",
+  "mediaLinks": []
 }
