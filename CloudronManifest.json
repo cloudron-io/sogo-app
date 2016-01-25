@@ -8,8 +8,12 @@
   "healthCheckPath": "/",
   "httpPort": 3000,
   "addons": {
-    "localstorage": {}
+    "localstorage": {},
+    "mysql": {},
+    "sendmail": {},
+    "ldap": {}
   },
+  "developmentMode": true,
   "targetBoxVersion": "0.4.0",
   "manifestVersion": 1,
   "website": "http://www.sogo.nu/",
