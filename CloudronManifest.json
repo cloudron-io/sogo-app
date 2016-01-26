@@ -17,6 +17,7 @@
   "manifestVersion": 1,
   "website": "http://www.sogo.nu/",
   "contactEmail": "support@cloudron.io",
+  "changelog": "file://CHANGELOG",
   "icon": "logo.png",
   "mediaLinks": [
     "https://i.imgur.com/Mdqc6KK.png",
