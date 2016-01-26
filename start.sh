@@ -23,5 +23,8 @@ chown cloudron:cloudron /run
 echo "Start nginx"
 nginx -c /run/nginx.conf &
 
+echo "Start memcached"
+memcached -u cloudron -v -m 32 &
+
 echo "Start sogod"
 exec /usr/local/bin/gosu cloudron:cloudron /usr/sbin/sogod

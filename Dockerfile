@@ -6,7 +6,7 @@ EXPOSE 3000
 RUN mkdir -p /app/code
 WORKDIR /app/code
 
-RUN apt-get update && apt-get install -y sogo
+RUN apt-get update && apt-get install -y sogo memcached
 
 ADD sogo.conf nginx.conf start.sh /app/code/
 
