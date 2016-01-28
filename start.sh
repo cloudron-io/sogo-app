@@ -18,7 +18,8 @@ sed -e "s,##HOSTNAME##,${APP_DOMAIN}," \
     /app/code/nginx.conf  > /run/nginx.conf
 
 echo "Make cloudron own /run"
-chown cloudron:cloudron /run
+chown -R cloudron:cloudron /run
+chown -R cloudron:cloudron /etc/sogo
 
 echo "Start nginx"
 nginx -c /run/nginx.conf &
