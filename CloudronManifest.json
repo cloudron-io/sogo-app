@@ -4,7 +4,7 @@
   "author": "sogo developers",
   "description": "file://DESCRIPTION.md",
   "tagline": "Calendar and Contacts",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "healthCheckPath": "/healthcheck",
   "httpPort": 3000,
   "addons": {
