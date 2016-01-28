@@ -12,6 +12,7 @@ SOGo offers multiple ways to access the calendaring and address book data. Your 
  * Notifications
  * Resource Reservation
  * Categories
+ * Material Design Webinterface
 
 ### Desktop Clients
 
