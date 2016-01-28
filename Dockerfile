@@ -17,4 +17,6 @@ RUN rm /etc/sogo/sogo.conf && ln -s /run/sogo.conf /etc/sogo/sogo.conf
 RUN rm -rf /var/log/nginx && mkdir /run/nginx && ln -s /run/nginx /var/log/nginx
 RUN mkdir /run/GNUstep && ln -s /run/GNUstep /home/cloudron/GNUstep
 
+RUN chown -R cloudron:cloudron /etc/sogo
+
 CMD [ "/app/code/start.sh" ]
