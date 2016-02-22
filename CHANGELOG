@@ -10,3 +10,5 @@
 [0.2.1]
 * Allow users to add imap servers
 
+[0.2.2]
+* Update to SOGo 0.3.1
