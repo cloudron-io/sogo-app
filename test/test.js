@@ -45,11 +45,11 @@ describe('Application life cycle test', function () {
     var TEST_TIMEOUT = 5000;
     var app;
 
-    it('build app', function () {
+    xit('build app', function () {
         execSync('cloudron build', { cwd: path.resolve(__dirname, '..'), stdio: 'inherit' });
     });
 
-    it('install app', function () {
+    xit('install app', function () {
         execSync('cloudron install --new --wait --location ' + LOCATION, { cwd: path.resolve(__dirname, '..'), stdio: 'inherit' });
     });
 
@@ -61,13 +61,15 @@ describe('Application life cycle test', function () {
         expect(app).to.be.an('object');
     });
 
-    xit('can login', function (done) {
-        browser.get('https://' + app.fqdn + '/home');
-        browser.wait(until.elementLocated(by.name('emailOrUsername')), TEST_TIMEOUT).then(function () {
-            browser.findElement(by.name('emailOrUsername')).sendKeys(process.env.USERNAME);
-            browser.findElement(by.name('pass')).sendKeys(process.env.PASSWORD);
-            browser.findElement(by.id('login-card')).submit();
-            browser.wait(until.elementLocated(by.className('room-title')), TEST_TIMEOUT).then(function () { done(); });
+    it('can login', function (done) {
+        browser.get('https://' + app.fqdn);
+        browser.wait(until.elementLocated(by.id('input_1')), TEST_TIMEOUT).then(function () {
+            browser.wait(until.elementIsVisible(browser.findElement(by.id('input_1'))), TEST_TIMEOUT).then(function () {
+                browser.findElement(by.id('input_1')).sendKeys(process.env.USERNAME);
+                browser.findElement(by.id('input_2')).sendKeys(process.env.PASSWORD);
+                browser.findElement(by.name('loginForm')).submit();
+                browser.wait(until.elementLocated(by.xpath('/html/body/main/section/div/div[1]/md-content/button')), TEST_TIMEOUT).then(function () { done(); });
+            });
         });
     });
 
