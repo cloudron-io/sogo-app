@@ -61,6 +61,7 @@ describe('Application life cycle test', function () {
     });
 
     it('can login', function (done) {
+        browser.manage().deleteAllCookies();
         browser.get('https://' + app.fqdn);
 
         browser.wait(until.elementLocated(by.id('input_1')), TEST_TIMEOUT).then(function () {
@@ -111,6 +112,7 @@ describe('Application life cycle test', function () {
     });
 
     it('can login', function (done) {
+        browser.manage().deleteAllCookies();
         browser.get('https://' + app.fqdn);
 
         browser.wait(until.elementLocated(by.id('input_1')), TEST_TIMEOUT).then(function () {
@@ -140,6 +142,7 @@ describe('Application life cycle test', function () {
     });
 
     it('can login', function (done) {
+        browser.manage().deleteAllCookies();
         browser.get('https://' + app.fqdn);
 
         browser.wait(until.elementLocated(by.id('input_1')), TEST_TIMEOUT).then(function () {
