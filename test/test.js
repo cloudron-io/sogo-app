@@ -41,6 +41,7 @@ describe('Application life cycle test', function () {
 
     var LOCATION = 'rctest';
     var EVENT_TITLE = 'Meet the Cloudron Founders';
+    var CONTACT_CN = 'Max Mustermann';
     var TEST_TIMEOUT = 10000;
     var app;
 
@@ -103,6 +104,29 @@ describe('Application life cycle test', function () {
         });
     });
 
+    it('can create contact', function (done) {
+        browser.get('https://' + app.fqdn + '/SOGo/so/' + process.env.USERNAME + '/Contacts/view#/addressbooks/personal/card/new');
+
+        browser.wait(until.elementLocated(by.xpath('//*[@ng-model="editor.card.c_cn"]')), TEST_TIMEOUT).then(function () {
+            browser.wait(until.elementIsVisible(browser.findElement(by.xpath('//*[@ng-model="editor.card.c_cn"]'))), TEST_TIMEOUT).then(function () {
+                browser.findElement(by.xpath('//*[@ng-model="editor.card.c_cn"]')).sendKeys(CONTACT_CN);
+                browser.findElement(by.xpath('//*[@aria-label="Save"]')).click();
+
+                browser.wait(until.elementLocated(by.xpath('//*[text()="' + CONTACT_CN + '"]')), TEST_TIMEOUT).then(function () {
+                    done();
+                });
+            });
+        });
+    });
+
+    it('contact is present', function (done) {
+        browser.get('https://' + app.fqdn + '/SOGo/so/' + process.env.USERNAME + '/Contacts/view');
+
+        browser.wait(until.elementLocated(by.xpath('//*[text()="' + CONTACT_CN + '"]')), TEST_TIMEOUT).then(function () {
+            done();
+        });
+    });
+
     it('backup app', function () {
         execSync('cloudron backup --app ' + app.id, { cwd: path.resolve(__dirname, '..'), stdio: 'inherit' });
     });
@@ -133,6 +157,14 @@ describe('Application life cycle test', function () {
         });
     });
 
+    it('contact is still present', function (done) {
+        browser.get('https://' + app.fqdn + '/SOGo/so/' + process.env.USERNAME + '/Contacts/view');
+
+        browser.wait(until.elementLocated(by.xpath('//*[text()="' + CONTACT_CN + '"]')), TEST_TIMEOUT).then(function () {
+            done();
+        });
+    });
+
     it('move to different location', function () {
         browser.manage().deleteAllCookies();
         execSync('cloudron install --location ' + LOCATION + '2', { cwd: path.resolve(__dirname, '..'), stdio: 'inherit' });
@@ -159,6 +191,14 @@ describe('Application life cycle test', function () {
         browser.get('https://' + app.fqdn + '/SOGo/so/' + process.env.USERNAME + '/Calendar/view');
 
         browser.wait(until.elementLocated(by.xpath('//*[text()="' + EVENT_TITLE + '"]')), TEST_TIMEOUT).then(function () {
+            done();
+        });
+    });
+
+    it('contact is still present', function (done) {
+        browser.get('https://' + app.fqdn + '/SOGo/so/' + process.env.USERNAME + '/Contacts/view');
+
+        browser.wait(until.elementLocated(by.xpath('//*[text()="' + CONTACT_CN + '"]')), TEST_TIMEOUT).then(function () {
             done();
         });
     });
