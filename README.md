@@ -4,7 +4,7 @@ This repository contains the Cloudron app package source for [SOGo](http://sogo.
 
 ## Installation
 
-[![Install](https://cloudron.io/img/button32.png)](https://cloudron.io/button.html?app=nu.sogo.cloudronapp)
+[![Install](https://cloudron.io/img/button.svg)](https://cloudron.io/button.html?app=nu.sogo.cloudronapp)
 
 or using the [Cloudron command line tooling](https://cloudron.io/references/cli.html)
 
