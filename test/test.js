@@ -45,7 +45,7 @@ describe('Application life cycle test', function () {
     var TEST_TIMEOUT = 10000;
     var app;
 
-    it('build app', function () {
+    xit('build app', function () {
         execSync('cloudron build', { cwd: path.resolve(__dirname, '..'), stdio: 'inherit' });
     });
 
