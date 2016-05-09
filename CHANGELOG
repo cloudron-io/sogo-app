@@ -18,3 +18,6 @@
 
 [0.2.4]
 * Support username and email login
+
+[0.2.5]
+* Disable unsupported email notfications
