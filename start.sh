@@ -5,7 +5,6 @@ set -eu -o pipefail
 echo "Generating sogo.conf"
 
 sed -e "s,##MYSQL_URL##,${MYSQL_URL}," \
-    -e "s,##MAIL_SMTP_SERVER##,${MAIL_SMTP_SERVER}," \
     -e "s,##LDAP_URL##,${LDAP_URL}," \
     -e "s/##LDAP_BIND_DN##/${LDAP_BIND_DN}/" \
     -e "s/##LDAP_BIND_PASSWORD##/${LDAP_BIND_PASSWORD}/" \
