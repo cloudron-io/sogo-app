@@ -21,7 +21,7 @@ if (!process.env.USERNAME || !process.env.PASSWORD) {
 describe('Application life cycle test', function () {
     this.timeout(0);
 
-    var firefox = require('selenium-webdriver/firefox');
+    var firefox = require('selenium-webdriver/chrome');
     var server, browser = new firefox.Driver();
 
     before(function (done) {
