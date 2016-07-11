@@ -1,5 +1,5 @@
 FROM cloudron/base:0.8.1
-MAINTAINER sogo developers <support@cloudron.io>
+MAINTAINER SOGo developers <support@cloudron.io>
 
 EXPOSE 3000
 
