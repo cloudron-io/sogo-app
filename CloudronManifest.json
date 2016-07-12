@@ -19,9 +19,9 @@
   "changelog": "file://CHANGELOG",
   "icon": "logo.png",
   "mediaLinks": [
-    "https://i.imgur.com/ohhBopZ.png",
-    "https://i.imgur.com/TVsNQ5o.png",
-    "https://i.imgur.com/QPegrMT.png"
+    "https://raw.githubusercontent.com/cloudron-io/sogo-app/master/screenshots/0.png",
+    "https://raw.githubusercontent.com/cloudron-io/sogo-app/master/screenshots/1.png",
+    "https://raw.githubusercontent.com/cloudron-io/sogo-app/master/screenshots/2.png"
   ],
   "tags": [
     "calendar",
