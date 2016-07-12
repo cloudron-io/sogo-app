@@ -21,3 +21,6 @@
 
 [0.2.5]
 * Disable unsupported email notfications
+
+[0.2.6]
+* Update to new base image
