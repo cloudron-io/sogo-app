@@ -31,5 +31,5 @@ The e2e tests are located in the `test/` folder and require [nodejs](http://node
 cd sogo-app/test
 
 npm install
-mocha test.js
+USERNAME=<cloudron username> PASSWORD=<cloudron password> mocha --bail test.js
 ```

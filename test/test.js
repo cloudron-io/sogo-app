@@ -8,7 +8,6 @@ var execSync = require('child_process').execSync,
     webdriver = require('selenium-webdriver');
 
 var by = webdriver.By,
-    Keys = webdriver.Key,
     until = webdriver.until;
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
@@ -21,8 +20,8 @@ if (!process.env.USERNAME || !process.env.PASSWORD) {
 describe('Application life cycle test', function () {
     this.timeout(0);
 
-    var firefox = require('selenium-webdriver/chrome');
-    var server, browser = new firefox.Driver();
+    var chrome = require('selenium-webdriver/chrome');
+    var server, browser = new chrome.Driver();
 
     before(function (done) {
         var seleniumJar= require('selenium-server-standalone-jar');
@@ -39,10 +38,10 @@ describe('Application life cycle test', function () {
         done();
     });
 
-    var LOCATION = 'rctest';
+    var LOCATION = 'sogotest';
     var EVENT_TITLE = 'Meet the Cloudron Founders';
     var CONTACT_CN = 'Max Mustermann';
-    var TEST_TIMEOUT = 10000;
+    var TEST_TIMEOUT = 50000;
     var app;
 
     xit('build app', function () {
@@ -70,7 +69,7 @@ describe('Application life cycle test', function () {
                 browser.findElement(by.id('input_1')).sendKeys(process.env.USERNAME);
                 browser.findElement(by.id('input_2')).sendKeys(process.env.PASSWORD);
                 browser.findElement(by.name('loginForm')).submit();
-                browser.wait(until.elementLocated(by.xpath('//*[@aria-label="Create a new event"]')), TEST_TIMEOUT).then(function () { done(); });
+                browser.wait(until.elementLocated(by.xpath('//*[@aria-label="New Event"]')), TEST_TIMEOUT).then(function () { done(); });
             });
         });
     });
@@ -78,17 +77,27 @@ describe('Application life cycle test', function () {
     it('can create event', function (done) {
         browser.get('https://' + app.fqdn + '/SOGo/so/' + process.env.USERNAME + '/Calendar/view');
 
-        browser.wait(until.elementLocated(by.xpath('//*[@aria-label="Create a new event"]')), TEST_TIMEOUT).then(function () {
-            browser.wait(until.elementIsVisible(browser.findElement(by.xpath('//*[@aria-label="Create a new event"]'))), TEST_TIMEOUT).then(function () {
-                browser.findElement(by.xpath('//*[@aria-label="Create a new event"]')).click();
+        var elem = by.xpath('/html/body/main/section/div/div[1]/md-fab-speed-dial/md-fab-trigger');
+        browser.wait(until.elementLocated(elem), TEST_TIMEOUT).then(function () {
+            browser.wait(until.elementIsVisible(browser.findElement(elem)), TEST_TIMEOUT).then(function () {
+                browser.findElement(elem).click();
 
-                browser.wait(until.elementLocated(by.xpath('//*[@ng-model="editor.component.summary"]')), TEST_TIMEOUT).then(function () {
-                    browser.wait(until.elementIsVisible(browser.findElement(by.xpath('//*[@ng-model="editor.component.summary"]'))), TEST_TIMEOUT * 10).then(function () {
-                        browser.findElement(by.xpath('//*[@ng-model="editor.component.summary"]')).sendKeys(EVENT_TITLE);
-                        browser.findElement(by.xpath('//*[@ng-model="editor.component.summary"]')).submit();
+                browser.sleep(2000).then(function () {
 
-                        browser.wait(until.elementLocated(by.xpath('//*[text()="' + EVENT_TITLE + '"]')), TEST_TIMEOUT).then(function () {
-                            done();
+                    browser.wait(until.elementLocated(by.xpath('/html/body/main/section/div/div[1]/md-fab-speed-dial/md-fab-actions/div[1]/button')), TEST_TIMEOUT).then(function () {
+                        browser.wait(until.elementIsVisible(browser.findElement(by.xpath('/html/body/main/section/div/div[1]/md-fab-speed-dial/md-fab-actions/div[1]/button'))), TEST_TIMEOUT).then(function () {
+                            browser.findElement(by.xpath('/html/body/main/section/div/div[1]/md-fab-speed-dial/md-fab-actions/div[1]/button')).click();
+
+                            browser.wait(until.elementLocated(by.xpath('//*[@ng-model="editor.component.summary"]')), TEST_TIMEOUT).then(function () {
+                                browser.wait(until.elementIsVisible(browser.findElement(by.xpath('//*[@ng-model="editor.component.summary"]'))), TEST_TIMEOUT * 10).then(function () {
+                                    browser.findElement(by.xpath('//*[@ng-model="editor.component.summary"]')).sendKeys(EVENT_TITLE);
+                                    browser.findElement(by.xpath('//*[@ng-model="editor.component.summary"]')).submit();
+
+                                    browser.wait(until.elementLocated(by.xpath('//*[@aria-label="' + EVENT_TITLE + '"]')), TEST_TIMEOUT).then(function () {
+                                        done();
+                                    });
+                                });
+                            });
                         });
                     });
                 });
@@ -99,7 +108,7 @@ describe('Application life cycle test', function () {
     it('event is present', function (done) {
         browser.get('https://' + app.fqdn + '/SOGo/so/' + process.env.USERNAME + '/Calendar/view');
 
-        browser.wait(until.elementLocated(by.xpath('//*[text()="' + EVENT_TITLE + '"]')), TEST_TIMEOUT).then(function () {
+        browser.wait(until.elementLocated(by.xpath('//*[@aria-label="' + EVENT_TITLE + '"]')), TEST_TIMEOUT).then(function () {
             done();
         });
     });
@@ -144,7 +153,7 @@ describe('Application life cycle test', function () {
                 browser.findElement(by.id('input_1')).sendKeys(process.env.USERNAME);
                 browser.findElement(by.id('input_2')).sendKeys(process.env.PASSWORD);
                 browser.findElement(by.name('loginForm')).submit();
-                browser.wait(until.elementLocated(by.xpath('//*[@aria-label="Create a new event"]')), TEST_TIMEOUT).then(function () { done(); });
+                browser.wait(until.elementLocated(by.xpath('//*[@aria-label="New Event"]')), TEST_TIMEOUT).then(function () { done(); });
             });
         });
     });
@@ -152,7 +161,7 @@ describe('Application life cycle test', function () {
     it('event is still present', function (done) {
         browser.get('https://' + app.fqdn + '/SOGo/so/' + process.env.USERNAME + '/Calendar/view');
 
-        browser.wait(until.elementLocated(by.xpath('//*[text()="' + EVENT_TITLE + '"]')), TEST_TIMEOUT).then(function () {
+        browser.wait(until.elementLocated(by.xpath('//*[@aria-label="' + EVENT_TITLE + '"]')), TEST_TIMEOUT).then(function () {
             done();
         });
     });
@@ -182,7 +191,7 @@ describe('Application life cycle test', function () {
                 browser.findElement(by.id('input_1')).sendKeys(process.env.USERNAME);
                 browser.findElement(by.id('input_2')).sendKeys(process.env.PASSWORD);
                 browser.findElement(by.name('loginForm')).submit();
-                browser.wait(until.elementLocated(by.xpath('//*[@aria-label="Create a new event"]')), TEST_TIMEOUT).then(function () { done(); });
+                browser.wait(until.elementLocated(by.xpath('//*[@aria-label="New Event"]')), TEST_TIMEOUT).then(function () { done(); });
             });
         });
     });
@@ -190,7 +199,7 @@ describe('Application life cycle test', function () {
     it('event is still present', function (done) {
         browser.get('https://' + app.fqdn + '/SOGo/so/' + process.env.USERNAME + '/Calendar/view');
 
-        browser.wait(until.elementLocated(by.xpath('//*[text()="' + EVENT_TITLE + '"]')), TEST_TIMEOUT).then(function () {
+        browser.wait(until.elementLocated(by.xpath('//*[@aria-label="' + EVENT_TITLE + '"]')), TEST_TIMEOUT).then(function () {
             done();
         });
     });
